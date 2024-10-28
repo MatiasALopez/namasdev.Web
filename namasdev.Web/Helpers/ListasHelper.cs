@@ -6,7 +6,6 @@ using System.Linq;
 using System.Web.Mvc;
 
 using namasdev.Core.Types;
-using namasdev.Tipos;
 
 namespace namasdev.Web.Helpers
 {
