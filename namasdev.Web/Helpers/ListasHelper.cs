@@ -7,22 +7,11 @@ using System.Web.Mvc;
 
 using namasdev.Core.Types;
 using namasdev.Tipos;
-using namasdev.Web.Models;
 
 namespace namasdev.Web.Helpers
 {
     public class ListasHelper
     {
-        public static IEnumerable<SelectListItem> ObtenerSelectListItemsString(IEnumerable<string> st)
-        {
-            return st
-                .Select(s => new SelectListItem
-                {
-                    Text = s,
-                    Value = s.ToString(),
-                });
-        }
-
         public static SelectList ObtenerDiasSelectList()
         {
             var items = Enumerable.Range(0, 7)
@@ -62,11 +51,6 @@ namespace namasdev.Web.Helpers
             return CrearSelectListDesdeItems(items);
         }
         
-        public static SelectList ObtenerSelectListVacio()
-        {
-            return CrearSelectListDesdeItems(new SelectListItem[0]);
-        }
-
         public static SelectList ObtenerMesesSelectList(IEnumerable<MesYAño> meses)
         {
             return CrearSelectListDesdeLista(
@@ -107,12 +91,13 @@ namespace namasdev.Web.Helpers
         public static SelectList ObtenerMesesSelectList()
         {
             var nombreMeses = DateTimeFormatInfo.CurrentInfo.MonthNames
-                              .Take(12)
-                              .Select((name, index) => new SelectListItem
-                              {
-                                  Value = (index + 1).ToString(),
-                                  Text = name,
-                              }).ToList();
+                .Take(12)
+                .Select((name, index) => new SelectListItem
+                {
+                    Value = (index + 1).ToString(),
+                    Text = name,
+                })
+                .ToList();
 
             return CrearSelectListDesdeItems(nombreMeses);
         }
@@ -153,6 +138,17 @@ namespace namasdev.Web.Helpers
                 });
         }
 
+        public static SelectList ObtenerMesesSelectList(IEnumerable<short> meses)
+        {
+            return CrearSelectListDesdeLista(
+                meses,
+                a => new SelectListItem
+                {
+                    Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(a),
+                    Value = a.ToString()
+                });
+        }
+
         public static SelectList ObtenerTrimestresSelectList()
         {
             var items = new List<SelectListItem>();
@@ -163,49 +159,6 @@ namespace namasdev.Web.Helpers
             }
 
             return new SelectList(items, "Value", "Text");
-        }
-
-        private static SelectList CrearSelectListDesdeLista<T>(IEnumerable<T> items,
-            Func<T, SelectListItem> selector)
-        {
-            if (items == null)
-            {
-                throw new ArgumentNullException("items");
-            }
-
-            return new SelectList(items.Select(selector), "Value", "Text");
-        }
-
-        private static SelectList CrearSelectListDesdeLista(IEnumerable items)
-        {
-            if (items == null)
-            {
-                throw new ArgumentNullException("items");
-            }
-
-            return new SelectList(items);
-        }
-
-        private static SelectList CrearSelectListDesdeItems(IEnumerable<SelectListItem> items,
-            string valorSeleccionado = null)
-        {
-            if (items == null)
-            {
-                throw new ArgumentNullException("items");
-            }
-
-            return new SelectList(items, "Value", "Text", valorSeleccionado);
-        }
-
-        public static SelectList ObtenerMesesSelectList(IEnumerable<short> meses)
-        {
-            return CrearSelectListDesdeLista(
-                meses,
-                a => new SelectListItem
-                {
-                    Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(a),
-                    Value = a.ToString()
-                });
         }
 
         public static IEnumerable<SelectListItem> ObtenerMesesDelTrimestreSelectListItems(
@@ -221,6 +174,43 @@ namespace namasdev.Web.Helpers
                     Selected = seleccionados != null && seleccionados.Contains(t.Mes)
                 })
                 .ToList();
+        }
+
+        public static SelectList ObtenerSelectListVacio()
+        {
+            return CrearSelectListDesdeItems(new SelectListItem[0]);
+        }
+
+        public static SelectList CrearSelectListDesdeLista<T>(IEnumerable<T> items,
+            Func<T, SelectListItem> selector)
+        {
+            if (items == null)
+            {
+                throw new ArgumentNullException("items");
+            }
+
+            return new SelectList(items.Select(selector), "Value", "Text");
+        }
+
+        public static SelectList CrearSelectListDesdeLista(IEnumerable items)
+        {
+            if (items == null)
+            {
+                throw new ArgumentNullException("items");
+            }
+
+            return new SelectList(items);
+        }
+
+        public static SelectList CrearSelectListDesdeItems(IEnumerable<SelectListItem> items,
+            string valorSeleccionado = null)
+        {
+            if (items == null)
+            {
+                throw new ArgumentNullException("items");
+            }
+
+            return new SelectList(items, "Value", "Text", valorSeleccionado);
         }
     }
 }
