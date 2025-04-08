@@ -26,7 +26,7 @@ namespace namasdev.Web.Models
         
         public string Nombre
         {
-            get { return Formateador.FormatoNombreArchivoDesdeUrl(ArchivoURL); }
+            get { return Formateador.NombreArchivoDesdeUrl(ArchivoURL); }
         }
 
         public bool SePuedeVisualizar

@@ -16,7 +16,7 @@ namespace namasdev.Web.Helpers
             var items = Enumerable.Range(0, 7)
                 .Select(dia => new SelectListItem
                 {
-                    Text = Formateador.FormatoDia(dia),
+                    Text = Formateador.Dia(dia),
                     Value = dia.ToString(),
                 });
             return CrearSelectListDesdeItems(items);
@@ -30,7 +30,7 @@ namespace namasdev.Web.Helpers
             string horaTexto;
             while (true)
             {
-                horaTexto = Formateador.FormatoHora(hora);
+                horaTexto = Formateador.Hora(hora);
                 items.Add(new SelectListItem
                 {
                     Text = horaTexto,
@@ -62,8 +62,8 @@ namespace namasdev.Web.Helpers
         {
             return CrearSelectListDesdeItems(new List<SelectListItem>
                 {
-                    new SelectListItem { Text = Formateador.FormatoSiNo(true), Value = true.ToString() },
-                    new SelectListItem { Text = Formateador.FormatoSiNo(false), Value = false.ToString() },
+                    new SelectListItem { Text = Formateador.SiNo(true), Value = true.ToString() },
+                    new SelectListItem { Text = Formateador.SiNo(false), Value = false.ToString() },
                 },
                 valorSeleccionado?.ToString());
         }

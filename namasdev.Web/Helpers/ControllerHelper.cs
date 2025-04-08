@@ -47,13 +47,13 @@ namespace namasdev.Web.Helpers
         private IEnumerable<string> FormatearMensajes(IEnumerable<string> mensajes)
         {
             return mensajes != null && mensajes.Any()
-                ? mensajes.Select(FormatearMensaje)
+                ? mensajes.Select(FormatearMensaje).ToArray()
                 : null;
         }
 
         private string FormatearMensaje(string mensaje)
         {
-            return Formateador.FormatoHtml(mensaje);
+            return Formateador.Html(mensaje);
         }
 
         public ActionResult CrearActionResultArchivo(string archivoNombre, byte[] archivoContenido,
