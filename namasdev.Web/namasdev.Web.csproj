@@ -106,6 +106,10 @@
     <Compile Include="Helpers\UrlHelper.cs" />
     <Compile Include="Helpers\UsuarioHelper.cs" />
     <Compile Include="ModelBinders\DateTimeModelBinder.cs" />
+    <Compile Include="ModelBinders\DoubleModelBinder.cs" />
+    <Compile Include="ModelBinders\LongModelBinder.cs" />
+    <Compile Include="ModelBinders\ShortModelBinder.cs" />
+    <Compile Include="ModelBinders\IntegerModelBinder.cs" />
     <Compile Include="ModelBinders\DecimalModelBinder.cs" />
     <Compile Include="Models\ArchivoItemModel.cs" />
     <Compile Include="Models\BootstrapSelectResultData.cs" />
